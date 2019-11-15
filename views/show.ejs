@@ -1,0 +1,35 @@
+<% include ./partials/header %>
+
+<div class="container show_container">
+		<h2 id="show_heading"><%=blog.title%></h2>
+		<div>
+			<%=blog.created.toDateString()%>
+		</div>
+		<img id="show_img" src="<%=blog.image%>">
+		<p id="show_content">
+			<%-blog.body%>
+		</p>
+		<% if(blog.author.id.equals(currentUser._id)) { %>
+			<a class="btn btn-outline-info" href="/blogs/<%=blog._id%>/edit">Edit</a>
+			<form id="delete" action="/blogs/<%=blog._id%>?_method=DELETE" method="POST">
+				<button type="submit" class="btn btn-outline-danger">Delete</button>
+			</form>
+		<% } %>
+</div>
+<div class="container comment_container">
+	<a class="comment_form_btn btn btn-outline-primary" href="/blogs/<%=blog._id%>/comments/new" btn>Add Comment</a>
+	<% blog.comments.forEach(function(comment){ %>
+		<p>
+			<strong><%=comment.author.username%></strong> - <%=comment.content%>
+		</p>
+		<% if(blog.author.id.equals(currentUser._id)) { %>
+			<a class="btn btn-outline-info btn-sm" href="/blogs/<%=blog._id%>/comments/<%=comment._id%>/edit">Edit</a>
+			<form id="delete" action="/blogs/<%=blog._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+				<button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+			</form>
+		<% } %>
+	<% }) %>
+</div>
+
+<% include ./partials/footer %>
+

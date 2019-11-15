@@ -1,0 +1,29 @@
+<% include ./partials/header %>
+
+<div class="container index_container">
+	<h1 id="index_heading">
+		Contents
+	</h1>
+	<% blogs.forEach(function(blog){ %>
+		<div class="media" id="index_item">
+			<img class="align-self-start mr-4" id="index_img" src="<%=blog.image%>">
+			<div class="media-body">
+				<div>
+					<%=blog.author.username%>
+				</div>
+				<div id="date">
+					<%=blog.created.toDateString()%>
+				</div>
+				<h3><%=blog.title%></h3>
+				<p id="index_content_body">
+					<%=blog.body.substring(0,100)%>...
+				</p>
+				<a class="btn btn-outline-primary btn-sm" href="/blogs/<%= blog._id %>">Read More</a>
+			</div>
+		</div>
+	<% }) %>
+</div>
+
+
+<% include ./partials/footer %>
+

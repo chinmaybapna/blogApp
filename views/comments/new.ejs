@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+
+<div class="container form_container">
+	<h1 class="form_heading">
+		Add Comment to <%=blog.title%>
+	</h1>
+	<form action="/blogs/<%=blog._id%>/comments/" method="POST" class="form">
+		<div class="form_group">
+			<label>Comment:</label>
+			<input class="form-control" type="text" name="comments[content]" placeholder="Comment">
+		</div>
+		<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+	</form>
+</div>
+
+<% include ../partials/footer %>
